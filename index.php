@@ -1,3 +1,6 @@
+<?php 
+	include 'Classes/DB.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +24,10 @@
 			    <p class="lead">here you can upload</p>
 			  </div>
 			</div>
+			<h2> Your file has been uploaded</h2>
+			<p>File name: <?=  $_FILES["file"]["name"]?></p>
+			<p>File size: <?=  $_FILES["file"]["size"]?></p>
+			<p>File link: <a href="/files/<?= $encoded_file_name; ?>.<?= $file_name[1]; ?>"></a></p>
 			<form method="POST" enctype="multipart/form-data" action="upload.php">
 				<input class="form-control-file" type="file" name="file">
 				<button class="form-control" type="submit">Upload this file</button>
