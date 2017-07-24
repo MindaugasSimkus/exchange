@@ -1,6 +1,16 @@
 <?php 
-	include 'Classses/DB.php';
+	include 'Classses\DB.php';
+	define("SITEURL", "//localhost/mindaugassimkus/exchange");
+	$result = DB::query("SELECT * FROM files WHERE crypt = " . $_GET['crypt']. "'")[0];
+
+	print_r($result);
+
+
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +34,9 @@
 			    <p class="lead">here you can upload</p>
 			  </div>
 			</div>
-			<form method="POST" enctype="multipart/form-data" action="upload.php">
-				<input class="form-control-file" type="file" name="file">
-				<button class="form-control" type="submit">Upload this file</button>
-			</form>
+			<h2> Your file <?= $result->original_file_name ?> is ready for download</h2>
+			<p>File size: <?=  $result->file_size?></p>
+			<p>File link: <a downlaod href="<?=SITEURL;?>download.php?files/<?= $result->$encoded_file_name; ?>">Download</a></p>
 		</div>
 	</div>
 </div>

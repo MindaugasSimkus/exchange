@@ -4,7 +4,7 @@
 	define("SITEURL", "//localhost/mindaugassimkus/exchange/");
 
 	$file_name = explode(".", $_FILES["file"]["name"]);
-	print_r($file_name);
+
 
 	$encoded_file_name = md5($file_name[0]);
 	$target_file = "files/" . $encoded_file_name . "." . $file_name[1];
@@ -13,8 +13,10 @@
 
 	move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 
+	$crypt = md5($file_name[0] . rand(1, 1000000));
 	$db = new DB();
-	$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size) VALUES ('". $_FILES['file']['name'] . "','"  . $encoded_file_name . '.' . $file_name[1] . "','" . $_FILES['file']['size']."')");
+	$db->store("INSERT INTO files (original_file_name, encoded_file_name, file_size, crypt) VALUES ('". $_FILES['file']['name'] . "','"  . $encoded_file_name . '.' . $file_name[1] . "','" . $_FILES['file']['size']. "','" . $crypt . "')");
+
 
 ?>
 
@@ -44,7 +46,7 @@
 			<h2> Your file has been uploaded</h2>
 			<p>File name: <?=  $_FILES["file"]["name"]?></p>
 			<p>File size: <?=  $_FILES["file"]["size"]?></p>
-			<p>File link: <a download href="<?=SITEURL;?>/files/<?= $encoded_file_name; ?>.<?= $file_name[1]; ?>">Download</a></p>
+			<p>File link: <a href="<?=SITEURL;?>download.php?crypt=<?= $crypt; ?>">Link</a></p>
 		</div>
 	</div>
 </div>
