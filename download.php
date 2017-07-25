@@ -1,12 +1,7 @@
 <?php 
 	include 'Classses\DB.php';
-	define("SITEURL", "//localhost/mindaugassimkus/exchange");
-	$result = DB::query("SELECT * FROM files WHERE crypt = " . $_GET['crypt']. "'")[0];
-
-	print_r($result);
-
-
-
+	define("SITEURL", "//localhost/mindaugassimkus/exchange/");
+	$result = DB::query("SELECT * FROM files WHERE crypt = '" . $_GET['crypt']. "'")[0];
 
 ?>
 
@@ -28,15 +23,13 @@
 <div class ="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
-			<div class="jumbotron jumbotron-fluid">
-			 <div class="container">
-			    <h1 class="display-3">File exchange services</h1>
-			    <p class="lead">here you can upload</p>
-			  </div>
-			</div>
-			<h2> Your file <?= $result->original_file_name ?> is ready for download</h2>
-			<p>File size: <?=  $result->file_size?></p>
-			<p>File link: <a downlaod href="<?=SITEURL;?>download.php?files/<?= $result->$encoded_file_name; ?>">Download</a></p>
+					<h2>Your file <b><?= $result->original_file_name; ?></b> is ready for download</h2>
+					<p><b>File size:</b> <?= $result->file_size; ?> bytes.</p>
+					<p><b>Uploaded:</b>  <?= $result->upload_time;  ?></p>
+					<p>
+						<a class="btn btn-lg btn-secondary" download href="<?= SITEURL ;?>files/<?= $result->encoded_file_name; ?>">Download</a>
+					</p>
+					<?php echo $result->encoded_file_name; ?>
 		</div>
 	</div>
 </div>
