@@ -1,6 +1,8 @@
 <?php 
 	include 'Classses\DB.php';
+	include 'Classses\Download_link_type.php';
 	define("SITEURL", "//localhost/mindaugassimkus/exchange/");
+
 	$result = DB::query("SELECT * FROM files WHERE crypt = '" . $_GET['crypt']. "'")[0];
 
 ?>
@@ -27,8 +29,13 @@
 			<p><b>File size:</b> <?= $result->file_size; ?> bytes.</p>
 			<p><b>Uploaded:</b>  <?= $result->upload_time;  ?></p>
 			<p>
-				<a class="btn btn-lg btn-secondary" download href="<?= SITEURL ;?>files/<?= $result->encoded_file_name; ?>">Download</a>
-				Upload another file: <a class='btn btn-lg btn-secondary' href='index.php'>Link</a>
+				<?php 
+					
+					$link_type = new Download_link_type();
+					$link_type->check_extension($result);
+
+
+				?>
 			</p>
 		</div>
 	</div>

@@ -21,7 +21,7 @@
 			<div class="jumbotron jumbotron-fluid">
 			 <div class="container">
 			    <h1 class="display-3">File exchange services</h1>
-			    <p class="lead">Here you can upload files that are less than 10 mb.</p>
+			    <p class="lead">Here you can upload files that are less than 10 mb. Allowed file types are: rar, zip, jpg, png, mp3, mp4, avi, msi.</p>
 			  </div>
 			</div>
 			<form method="POST" enctype="multipart/form-data" action="upload.php">

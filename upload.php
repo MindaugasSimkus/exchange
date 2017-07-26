@@ -41,7 +41,7 @@
 				$check->check_type($file_name[count($file_name)-1]);
 
 				$encoded_file_name = md5($file_name[0]);
-				$target_file = "files/" . $encoded_file_name . "." . $file_name[1];
+				$target_file = "files/" . $encoded_file_name . "." . $file_name[count($file_name)-1];
 
 				move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 
