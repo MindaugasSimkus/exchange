@@ -4,33 +4,8 @@
 	ini_set('post_max_size', '48M');
 	ini_set('upload_max_filesize', '48M');
 	include 'Classses\DB.php';
+	include 'Classses\File_check.php';
 	define("SITEURL", "//localhost/mindaugassimkus/exchange/");
-
-	if ($_FILES["file"]["size"] > 10000000) {
-		
-		echo "<br/>Sorry. You can not upload file that exceeds 10 mb size. <br/>Upload another file: <a class='btn btn-lg btn-secondary' href='index.php'>Link</a>";
-		die();
-
-	} else {
-
-		$file_name = explode(".", $_FILES['file']['name']);
-
-		$encoded_file_name = md5($file_name[0]);
-		$target_file = "files/" . $encoded_file_name . "." . $file_name[1];
-
-		move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-
-		$crypt = md5($file_name[0] . rand(1, 100000));
-
-		$query = "INSERT into files 
-		(original_file_name, encoded_file_name, file_size, crypt) 
-		VALUES ('" . $_FILES["file"]["name"] ."' ,'" . $encoded_file_name . "." . $file_name[count($file_name)-1] . "','" . $_FILES["file"]["size"] . "', '". $crypt . "')";
-
-
-			DB::store($query);
-
-	}
-
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +31,30 @@
 			    <p class="lead">here you can upload</p>
 			  </div>
 			</div>
+			<?php 
+				$check = new File_check();
+				$check->check_size($_FILES['file']['size'], 10000000);
+				
+
+				$file_name = explode(".", $_FILES['file']['name']);
+
+				$check->check_type($file_name[count($file_name)-1]);
+
+				$encoded_file_name = md5($file_name[0]);
+				$target_file = "files/" . $encoded_file_name . "." . $file_name[1];
+
+				move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+				$crypt = md5($file_name[0] . rand(1, 100000));
+
+				$query = "INSERT into files 
+				(original_file_name, encoded_file_name, file_size, crypt) 
+				VALUES ('" . $_FILES["file"]["name"] ."' ,'" . $encoded_file_name . "." . $file_name[count($file_name)-1] . "','" . $_FILES["file"]["size"] . "', '". $crypt . "')";
+
+
+				DB::store($query);
+
+			?>
 			<h2> Your file has been uploaded</h2>
 			<p>File name: <?=  $_FILES["file"]["name"]?></p>
 			<p>File size: <?=  $_FILES["file"]["size"]?> bytes.</p>

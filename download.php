@@ -28,6 +28,7 @@
 			<p><b>Uploaded:</b>  <?= $result->upload_time;  ?></p>
 			<p>
 				<a class="btn btn-lg btn-secondary" download href="<?= SITEURL ;?>files/<?= $result->encoded_file_name; ?>">Download</a>
+				Upload another file: <a class='btn btn-lg btn-secondary' href='index.php'>Link</a>
 			</p>
 		</div>
 	</div>
