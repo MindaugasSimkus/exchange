@@ -23,13 +23,12 @@
 <div class ="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
-					<h2>Your file <b><?= $result->original_file_name; ?></b> is ready for download</h2>
-					<p><b>File size:</b> <?= $result->file_size; ?> bytes.</p>
-					<p><b>Uploaded:</b>  <?= $result->upload_time;  ?></p>
-					<p>
-						<a class="btn btn-lg btn-secondary" download href="<?= SITEURL ;?>files/<?= $result->encoded_file_name; ?>">Download</a>
-					</p>
-					<?php echo $result->encoded_file_name; ?>
+			<h2>Your file <b><?= $result->original_file_name; ?></b> is ready for download</h2>
+			<p><b>File size:</b> <?= $result->file_size; ?> bytes.</p>
+			<p><b>Uploaded:</b>  <?= $result->upload_time;  ?></p>
+			<p>
+				<a class="btn btn-lg btn-secondary" download href="<?= SITEURL ;?>files/<?= $result->encoded_file_name; ?>">Download</a>
+			</p>
 		</div>
 	</div>
 </div>
